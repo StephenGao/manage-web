@@ -27,7 +27,7 @@ public class BaseAction extends ActionSupport {
     public static final String XML = "xml";
     public static final String TEXT = "text";
 
-    //JSON对象压入页面
+    //JSON对象压入 页面
     protected <E> void putJSONResult(E data) {
         ActionContext.getContext().put(JSON, data);
     }
