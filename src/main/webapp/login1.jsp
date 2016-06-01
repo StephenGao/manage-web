@@ -30,7 +30,6 @@
 					</div>
 
 					<div class="space-6"></div>
-
 					<div class="position-relative">
 						<div id="login-box" class="login-box visible widget-box no-border">
 							<div class="widget-body">
@@ -41,7 +40,6 @@
 									</h4>
 
 									<div class="space-6"></div>
-
 									<form>
 										<fieldset>
 											<label class="block clearfix">
