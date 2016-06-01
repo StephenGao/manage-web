@@ -81,11 +81,8 @@
 
 
 								</div><!-- /widget-main -->
-
-
 							</div><!-- /widget-body -->
 						</div><!-- /login-box -->
-
 					</div><!-- /position-relative -->
 				</div>
 			</div><!-- /.col -->
