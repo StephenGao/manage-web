@@ -21,10 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="login-box">
 			<div class="hd"><img src="${ctx}/static/css/img/login/login-title.png"></div>
 			<div class="bd">
-				<%--<ul class="tabs">--%>
-					<%--<li class="current"><a href="#">简</a></li>--%>
-					<%--<li><a href="#">En</a></li>--%>
-				<%--</ul>--%>
 				<form action="" method="post" id="form1">
 					<%--<s:token></s:token>--%>
 					<div class="cont" id="div1">
