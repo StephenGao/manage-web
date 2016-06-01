@@ -1,0 +1,56 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+       default-autowire="byName" default-lazy-init="false">
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--<bean id="transactionInterceptor" lazy-init="true" abstract="true" class="org.springframework.transaction.interceptor.TransactionInterceptor">-->
+    <!--<property name="transactionManager" ref="transactionManager"/>-->
+    <!--<property name="transactionAttributes">-->
+    <!--<props>-->
+    <!--<prop key="save*">PROPAGATION_REQUIRED</prop>-->
+    <!--<prop key="delete*">PROPAGATION_REQUIRED</prop>-->
+    <!--<prop key="update*">PROPAGATION_REQUIRED</prop>-->
+    <!--<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>-->
+    <!--<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>-->
+    <!--</props>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+    <aop:config>
+        <aop:pointcut id="allServiceMethods" expression="execution(* com.pkit.service..*.*(..))" />
+        <aop:advisor advice-ref="logMethodAfterReturningAdvice" pointcut-ref="allServiceMethods"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="allServiceMethods"/>
+    </aop:config>
+
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" no-rollback-for="java.lang.RuntimeException" timeout="100"/>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!--<bean name="loggerAutoProxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">-->
+    <!--<property name="beanNames">-->
+    <!--<list>-->
+    <!--<value>*Manager</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name="interceptorNames">-->
+    <!--<list>-->
+    <!--<value>logMethodAfterReturningAdvice</value>-->
+    <!--<value>transactionInterceptor</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+</beans>
