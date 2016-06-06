@@ -7,7 +7,7 @@ import com.alibaba.druid.filter.config.ConfigTools;
  */
 public class Test {
     public static void main(String[] args) throws Exception {
-        String password = "123456";
+        String password = "gaoyu7780109";
         System.out.println(ConfigTools.encrypt(password));
     }
 }
